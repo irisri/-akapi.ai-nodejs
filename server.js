@@ -56,7 +56,7 @@ app.post("/upload", upload.single("csvFile"), (req, res) => {
 });
 
 async function getProperty(filterBy = null) {
-	return await Property.findAll({
+	const sqAtt = {
 		order: ["Lease Type"],
 		attributes: [
 			"Property Name",
@@ -65,29 +65,19 @@ async function getProperty(filterBy = null) {
 			"Lease Type",
 			"Unit Sqft",
 		],
-		where: {
-			"Unit Sqft": filterBy,
-		},
+
 		raw: true,
-	});
+	};
+	if (filterBy) {
+		sqAtt.where = { "Unit Sqft": filterBy };
+	}
+	return await Property.findAll(sqAtt);
 }
 
-app.get("/list", (req, res) => {
-	Property.findAll({
-		order: ["Lease Type"],
-		attributes: [
-			"Property Name",
-			"City",
-			"Tenant Name",
-			"Lease Type",
-			"Unit Sqft",
-		],
-		raw: true,
-	}).then((properties) => {
-		console.log(properties);
-		res.render("list", {
-			properties,
-		});
+app.get("/list", async (req, res) => {
+	const properties = await getProperty();
+	res.render("list", {
+		properties,
 	});
 });
 
