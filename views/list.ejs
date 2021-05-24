@@ -1,42 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="css/list.css" />
-		<title>Okapi</title>
+		<%- include('./partials/head'); %>
 	</head>
 
 	<body onload="init()">
-		<header>
-			<h1>Okapi</h1>
-		</header>
-		<form action="/list" method="POST">
-			<input type="number" placeholder="Search by Unit Sqft" name="filterBy" />
-			<button type="submit">Search</button>
-		</form>
-		<table>
-			<thead>
-				<tr>
-					<th>Property name</th>
-					<th>City</th>
-					<th>Tenants</th>
-					<th>Leas type</th>
-					<th>Unit Sqft</th>
-				</tr>
-			</thead>
-			<tbody>
-				<% for(let i=0; i < properties.length; i++) {%>
-				<tr>
-					<td><%= properties[i]["Property Name"]%></td>
-					<td><%= properties[i]["City"]%></td>
-					<td><%= properties[i]["Tenant Name"]%></td>
-					<td><%= properties[i]["Lease Type"]%></td>
-					<td><%= properties[i]["Unit Sqft"]%></td>
-				</tr>
-				<% } %>
-				<tr></tr>
-			</tbody>
-		</table>
+		<header><%- include('./partials/nav'); %></header>
+		<section class="container">
+			<form action="/list" method="POST">
+				<input
+					type="number"
+					placeholder="Search by Unit Sqft"
+					name="filterBy"
+				/>
+				<button type="submit">Search</button>
+			</form>
+			<table>
+				<thead>
+					<tr>
+						<th>Property name</th>
+						<th>City</th>
+						<th>Tenants</th>
+						<th>Leas type</th>
+						<th>Unit Sqft</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% for(let i=0; i < properties.length; i++) {%>
+					<tr>
+						<td><%= properties[i]["Property Name"]%></td>
+						<td><%= properties[i]["City"]%></td>
+						<td><%= properties[i]["Tenant Name"]%></td>
+						<td><%= properties[i]["Lease Type"]%></td>
+						<td><%= properties[i]["Unit Sqft"]%></td>
+					</tr>
+					<% } %>
+					<tr></tr>
+				</tbody>
+			</table>
+		</section>
 	</body>
 </html>

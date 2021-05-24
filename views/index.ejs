@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="css/index.css" />
-		<title>Okapi</title>
+		<%- include('./partials/head'); %>
 	</head>
 
 	<body onload="init()">
-		<header>
-			<h1>Okapi</h1>
-		</header>
-		<form action="/upload" method="POST" enctype="multipart/form-data">
-			<p>Please upload CSV file</p>
-			<input type="file" name="csvFile" accept=".csv" />
-			<button type="submit">Upload</button>
-		</form>
+		<header><%- include('./partials/nav'); %></header>
+		<section class="container">
+			<form action="/upload" method="POST" enctype="multipart/form-data">
+				<p>Please upload CSV file</p>
+				<input type="file" name="csvFile" accept=".csv" />
+				<button type="submit">Upload</button>
+			</form>
+		</section>
 	</body>
 </html>
